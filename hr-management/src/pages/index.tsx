@@ -1,12 +1,18 @@
 import Image from "next/image";
 import { Inter } from "next/font/google";
 import { useState } from "react";
+import { type } from "os";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export type Todo = {
   id: number;
   checked: boolean;
+  todo: string;
+  deadline: Date;
+};
+
+export type AddTodo = {
   todo: string;
   deadline: Date;
 };
@@ -32,6 +38,12 @@ export default function Home() {
       deadline: new Date("2023-09-13"),
     },
   ]);
+
+  const [addTodo, setAddTodo] = useState<AddTodo>({
+    todo: "",
+    deadline: new Date(),
+  });
+
   const judul = "Todo List";
 
   const checkDeadlineMiss = (deadline: Date) => {
@@ -45,6 +57,15 @@ export default function Home() {
     }
   };
 
+  const onChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+
+    setAddTodo((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
   const onChangeCheck = (id: number) => {
     const newTodoList = [...todoList];
 
@@ -53,6 +74,23 @@ export default function Home() {
     newTodoList[findIndex].checked = !newTodoList[findIndex].checked;
 
     setTodoList(newTodoList);
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const newTodo: Todo = {
+      id: todoList.length + 1,
+      checked: false,
+      deadline: new Date(addTodo.deadline),
+      todo: addTodo.todo,
+    };
+
+    const newTodoList = [...todoList, newTodo];
+
+    setTodoList(newTodoList);
+
+    console.log("addTodo", addTodo);
   };
 
   const deleteTodo = (id: number) => {
@@ -74,7 +112,32 @@ export default function Home() {
       <section className="px-5 py-5 border-2 border-light m-5 rounded-md">
         <h2 className="text-3xl">{judul}</h2>
 
-        <table className="table-auto">
+        <form className="flex flex-col gap-2 mt-5" onSubmit={handleSubmit}>
+          <label htmlFor="todo">Todo</label>
+          <input
+            type="text"
+            name="todo"
+            id="todo"
+            onChange={onChangeInput}
+            className="border-2 border-gray-400 rounded-md px-2 py-1"
+          />
+          <label htmlFor="deadline">Deadline</label>
+          <input
+            type="date"
+            name="deadline"
+            id="deadline"
+            onChange={onChangeInput}
+            className="border-2 border-gray-400 rounded-md px-2 py-1"
+          />
+          <button
+            type="submit"
+            className="bg-blue-500 text-white px-2 py-1 rounded-md"
+          >
+            Add Todo
+          </button>
+        </form>
+
+        <table className="table-auto mt-10">
           <thead>
             <tr>
               <th>No</th>
