@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="text" id="nilai" value="0" />
+    <button id="btnCalculate" onclick="calculateNilai()">Hitung</button>
+
+    <div id="result"></div>
+
+    <div
+      style="width: 300px; height: 300px; background-color: blue"
+      onmouseover="this.style.backgroundColor = 'red'"
+      onmouseout="this.style.backgroundColor = 'blue'"
+    ></div>
+
+    <script>
+      function sum(...numbers) {
+        let result = 0;
+        console.log("numbers", numbers);
+
+        numbers.forEach((number) => {
+          result += number;
+        });
+
+        return result;
+      }
+
+      function gradeStudent(nilai) {
+        if (nilai >= 90) {
+          return "A";
+        } else if (nilai >= 80) {
+          return "B";
+        } else if (nilai >= 70) {
+          return "C";
+        } else if (nilai >= 60) {
+          return "D";
+        } else {
+          return "E";
+        }
+      }
+
+      const calculateNilai = () => {
+        const nilai = document.getElementById("nilai").value;
+        const grade = gradeStudent(nilai);
+
+        document.getElementById("result").innerHTML = grade;
+      };
+
+      const gradeAlphabetStudent = (nilai) => {
+        const grade = gradeStudent(nilai);
+
+        return grade;
+      };
+
+      const nilai = sum(50, 50, 50);
+      const nilai2 = sum(10, 20);
+
+      const pangkatDua = (angka) => angka * angka;
+
+      const grade = gradeAlphabetStudent(nilai);
+
+      console.log(nilai);
+      console.log(nilai2);
+
+      console.log("grade", grade);
+
+      const btnCalculate = document.getElementById("btnCalculate");
+
+      btnCalculate.addEventListener("click", () => {});
+
+      const [nilaiPertama, nilaiKedua] = [10, 20];
+
+      console.log("nilaiPertama", nilaiPertama);
+      console.log("nilaiKedua", nilaiKedua);
+    </script>
+  </body>
+</html>

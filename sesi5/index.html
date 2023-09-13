@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="result"></div>
+
+    <!-- <div id="resultArray"></div> -->
+
+    <ul id="resultArray"></ul>
+
+    <script type="text/javascript">
+      let iniVariable = "ini isi dari variable";
+      let nilai = 90;
+      let lulus = true;
+      var iniVariable2 = "ini isi dari variable 2";
+      const iniKonstanta = "ini isi dari konstanta";
+
+      console.log(iniVariable);
+
+      iniVariable = "ini isi dari variable yang sudah diubah";
+
+      console.log(iniVariable);
+
+      // iniKonstanta = "ini isi dari konstanta yang sudah diubah";
+
+      // console.log(iniKonstanta);
+
+      document.getElementById("result").innerHTML = "Ini dari Javascript";
+
+      let hobi = ["makan", "minum", "tidur", "nonton"];
+
+      const resultArray = document.getElementById("resultArray");
+
+      // for (let i = 0; i < hobi.length; i = i + 1) {
+      //   // console.log(i);
+
+      //   // const hobiItem = document.createElement("li");
+
+      //   // hobiItem.innerHTML = hobi[i];
+
+      //   // resultArray.appendChild(hobiItem);
+
+      //   resultArray.innerHTML += "<li>" + hobi[i] + "</li>";
+      // }
+
+      hobi.forEach((item, index) => {
+        resultArray.innerHTML += "<li>" + item + "</li>";
+      });
+
+      let student = {
+        nama: "Rizky",
+        umur: 20,
+        hobi: ["makan", "minum", "tidur", "nonton"],
+      };
+
+      let studentList = [];
+
+      studentList.push(student);
+
+      console.log(studentList);
+
+      console.log(studentList[0].nama);
+
+      console.log(student.nama);
+      console.log(student.umur);
+      console.log(student.hobi);
+
+      document.querySelector("#result").innerHTML =
+        student.nama + " " + student.umur + " " + student.hobi[0];
+
+      function countDownDate(limitDate) {
+        const countDownDate = new Date(limitDate);
+
+        const now = new Date();
+
+        const distance = countDownDate.getTime() - now.getTime();
+        // console.log(distance);
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+
+        const hours = Math.floor(
+          (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+        );
+
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        document.getElementById("result").innerHTML =
+          days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+      }
+
+      setInterval(() => {
+        countDownDate("Sep 12, 2023 00:00:00");
+      }, 1000);
+
+      // for (let i = hobi.length; i > 0; i--) {
+      //   console.log(i);
+      // }
+
+      // for(let i = hobi.length; i > 1; i--))
+
+      // document.getElementById("resultArray").innerHTML = hobi[0];
+
+      // console.log(iniVariable2);
+    </script>
+  </body>
+</html>
