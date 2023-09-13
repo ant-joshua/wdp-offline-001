@@ -55,6 +55,20 @@ export default function Home() {
     setTodoList(newTodoList);
   };
 
+  const deleteTodo = (id: number) => {
+    console.log("todoList", todoList);
+    const findIndex = todoList.findIndex((todo) => todo.id === id);
+    console.log("findIndex", findIndex);
+
+    todoList.splice(findIndex, 1);
+
+    console.log("splice", todoList);
+
+    const newTodoList = [...todoList];
+
+    setTodoList(newTodoList);
+  };
+
   return (
     <main>
       <section className="px-5 py-5 border-2 border-light m-5 rounded-md">
@@ -67,6 +81,7 @@ export default function Home() {
               <th>Todo</th>
               <th>Deadline</th>
               <th>Check</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>
@@ -89,6 +104,14 @@ export default function Home() {
                     checked={todo.checked}
                     onChange={() => onChangeCheck(todo.id)}
                   />
+                </td>
+                <td>
+                  <button
+                    className="bg-red-500 text-white px-2 py-1 rounded-md"
+                    onClick={() => deleteTodo(todo.id)}
+                  >
+                    Delete
+                  </button>
                 </td>
               </tr>
             ))}
